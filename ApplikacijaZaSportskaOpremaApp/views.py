@@ -98,6 +98,7 @@ def cart(request):
     totalPrice=0
     for item in queryset:
         totalPrice = totalPrice+item.price
+
     context = {"cartitems": queryset, "totalPrice": totalPrice}
     return render(request, "cart.html", context=context)
 
@@ -122,4 +123,25 @@ def order(request):
     if request.method == "GET":
         return render(request, "order.html")
     else:
-        return redirect("/cart")
+        queryset = CartItem.objects.filter(user=request.user)
+
+        totalPrice = 0
+        for item in queryset:
+            totalPrice = totalPrice + item.price
+        order1 = Order()
+        order1.user = request.user
+        order1.totalPrice = totalPrice
+        order1.date_created = datetime.datetime.now()
+        order1.save()
+
+        for cartitem in queryset:
+            orderitem = OrderItem()
+            orderitem.order = order1
+            orderitem.product = cartitem.product
+            orderitem.price = cartitem.price
+            orderitem.quantity = cartitem.quantity
+            orderitem.save()
+
+            CartItem.delete(cartitem)
+
+        return redirect("cart")

@@ -73,6 +73,44 @@ class CartItemAdmin(admin.ModelAdmin):
         return True
 
 
+class OrderAdmin(admin.ModelAdmin):
+
+    def has_change_permission(self, request, obj=None):
+        if obj and request.user.is_superuser:
+            return True
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        if obj and request.user.is_superuser:
+            return True
+        return True
+
+    def has_view_permission(self, request, obj=None):
+        if obj and request.user.is_superuser:
+            return True
+        return True
+
+
+class OrderItemAdmin(admin.ModelAdmin):
+
+    def has_change_permission(self, request, obj=None):
+        if obj and request.user.is_superuser:
+            return True
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        if obj and request.user.is_superuser:
+            return True
+        return True
+
+    def has_view_permission(self, request, obj=None):
+        if obj and request.user.is_superuser:
+            return True
+        return True
+
+
 admin.site.register(CartItem, CartItemAdmin)
+admin.site.register(Order, OrderAdmin)
+admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(Produkt, ProduktAdmin)
 admin.site.register(Category, CategoryAdmin)
