@@ -116,3 +116,10 @@ def addToCart(request, id=0):
             cartitem.price = cartitem.product.price * cartitem.quantity
             cartitem.save()
         return redirect("/cart")
+
+
+def order(request):
+    if request.method == "GET":
+        return render(request, "order.html")
+    else:
+        return redirect("/cart")
