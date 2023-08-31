@@ -14,13 +14,15 @@
     <div class="row" style="margin: auto">
     {% for kategorija in categories %}
 
-            <a href="{% url 'products' kategorija.id %}">
-                <div class="card m-3 text-white" style="width: 18rem; background-color: #575757;">
-                <div class="card-body">
-                    <h5 class="card-title">{{kategorija.categoryName}}</h5>
+
+                <div class="card m-3 mt-5 text-white" style="width: 18rem; height: 150px; background-color: #575757;">
+                <a href="{% url 'products' kategorija.id %}" style="text-decoration: none; color: white">
+                    <div class="card-body" style="margin-top: 25px">
+                        <h5 class="card-title">{{kategorija.categoryName}}</h5>
+                    </div>
+                </a>
                 </div>
-                </div>
-            </a>
+
 
             {% if forloop.counter|divisibleby:3 and not forloop.last %}
             </div><div class="row " style="margin: auto">
