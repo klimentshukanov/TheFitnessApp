@@ -26,3 +26,15 @@ class RegisterUserForm(UserCreationForm):
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
+
+
+class CartItemQuantityForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CartItemQuantityForm, self).__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs["class"] = "form-control"
+
+    class Meta:
+        model = CartItem
+        fields = ('quantity',)
+

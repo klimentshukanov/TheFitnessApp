@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Details</title>
+    <title>Add to Cart</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
 </head>
@@ -11,21 +11,24 @@
 {% include 'navbar.html' %}
 
 <div class="container text-white text-center mt-5">
-        <div>
-            <h1>{{produkt.productName}}</h1>
-            <img src="{{MEDIA_URL}}{{produkt.image.url}}" alt="..." height="45%" width="45%">
-            <p style="font-size: 25px">{{produkt.productDesc}}</p>
-            <p style="font-size: 25px">Price: {{produkt.price}}$</p>
+    <h1>{{produkt.productName}}</h1>
+    <div class="mb-3"><img src="{{MEDIA_URL}}{{produkt.image.url}}" height="45%" width="45%" alt="..."></div>
 
-            {% if user.is_authenticated %}
-                <div>
-                    <a href="{% url 'addToCart' produkt.id %}">
-                        <button class="btn btn-dark">Add to Cart</button>
-                    </a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
+    <form action="" method=POST class="text-white">
+
+			{% csrf_token %}
+
+             <div class="mb-3" style="width: 100px; margin: auto">
+
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type="number" class="form-control" name="quantity" id="quantity">
+
+              </div>
+
+        <input type="submit" value="Add" class="btn btn-dark" style="width: 100px">
+    </form>
+
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

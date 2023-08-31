@@ -94,4 +94,25 @@ def details(request, id=0):
 
 
 def cart(request):
-     return render(request, "cart.html")
+    queryset = CartItem.objects.filter(user=request.user)
+    totalPrice=0
+    for item in queryset:
+        totalPrice = totalPrice+item.price
+    context = {"cartitems": queryset, "totalPrice": totalPrice}
+    return render(request, "cart.html", context=context)
+
+
+def addToCart(request, id=0):
+    if request.method == "GET":
+        produkt = Produkt.objects.get(pk=id)
+        context = {"produkt": produkt, "form": CartItemQuantityForm}
+        return render(request, "addToCart.html", context=context)
+    else:
+        form_data = CartItemQuantityForm(data=request.POST, files=request.FILES)
+        if form_data.is_valid():
+            cartitem = form_data.save(commit=False)
+            cartitem.product = Produkt.objects.get(pk=id)
+            cartitem.user = request.user
+            cartitem.price = cartitem.product.price * cartitem.quantity
+            cartitem.save()
+        return redirect("/cart")

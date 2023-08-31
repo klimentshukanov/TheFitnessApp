@@ -34,4 +34,5 @@ urlpatterns = [
     path('logout/', logout_user, name="logout_user"),
     path('details/<int:id>', details, name="details"),
     path('cart', cart, name="cart"),
+    path('addToCart/<int:id>', addToCart, name="addToCart"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
