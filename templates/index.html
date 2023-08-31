@@ -26,7 +26,7 @@
 
             <h1 class="text-white mb-5">Welcome to the <br> Fitness Shop</h1>
             <div>
-                <a href="/products">
+                <a href="/categories">
                     <button type="button" class="btn text-white" style="background-color: #1a1a1a; font-size: 20px">Browse Products</button>
                 </a>
             </div>
@@ -48,7 +48,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{produkt.productName}}</h5>
                 <div class="text-center" style="margin: auto">
-                    <a href="#" class="btn btn-dark">More Info</a>
+                    <a href="{% url 'details' produkt.id %}" class="btn btn-dark">More Info</a>
                 </div>
             </div>
             </div>

@@ -15,10 +15,19 @@ def index(request):
     return render(request, "index.html", context=context)
 
 
-def products(request):
-    queryset = Produkt.objects.all()
-    context = {"products": queryset}
-    return render(request, "products.html", context=context)
+def categories(request):
+    queryset = Category.objects.all()
+    context = {"categories": queryset}
+    return render(request, "categories.html", context=context)
+
+
+def products(request, id=0):
+    if id == 0:
+        return render(request, "categories.html")
+    else:
+        queryset = Produkt.objects.filter(category=id)
+        context = {"products": queryset}
+        return render(request, "products.html", context=context)
 
 
 def add(request):
@@ -29,7 +38,7 @@ def add(request):
             produkt.user = request.user
             produkt.image = form_data.cleaned_data['image']
             produkt.save()
-            return redirect("products")
+            return redirect("categories")
 
     return render(request, "add.html", context={"form": ProduktForm})
 
@@ -73,3 +82,16 @@ def register_user(request):
     return render(request, 'register.html', {
         'form': form,
     })
+
+
+def details(request, id=0):
+    if id == 0:
+        return render(request, "products.html")
+    else:
+        produkt = Produkt.objects.get(pk=id)
+        context = {"produkt": produkt}
+        return render(request, "details.html", context=context)
+
+
+def cart(request):
+     return render(request, "cart.html")

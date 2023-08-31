@@ -29,4 +29,18 @@ class ProduktAdmin(admin.ModelAdmin):
         return True
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ["categoryName"]
+
+    def has_change_permission(self, request, obj=None):
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return True
+
+    def has_view_permission(self, request, obj=None):
+        return True
+
+
 admin.site.register(Produkt, ProduktAdmin)
+admin.site.register(Category, CategoryAdmin)

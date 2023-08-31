@@ -6,7 +6,7 @@
     </a>
     <ul class="nav justify-content-end">
           <li class="nav-item">
-            <a class="nav-link" href="/products" style="color: white">Products</a>
+            <a class="nav-link" href="/categories" style="color: white">Products</a>
           </li>
 
         {% if not user.is_authenticated %}
@@ -17,6 +17,9 @@
 
         {% if user.is_authenticated %}
           <li class="nav-item">
+            <a class="nav-link" href="/cart" style="color: white">Cart</a>
+          </li>
+            <li class="nav-item">
             <a class="nav-link" href="#" style="color: white">{{user.username}}</a>
           </li>
             <li class="nav-item">
