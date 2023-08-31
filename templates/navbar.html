@@ -8,9 +8,22 @@
           <li class="nav-item">
             <a class="nav-link" href="/products" style="color: white">Products</a>
           </li>
+
+        {% if not user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: white">Log in</a>
+            <a class="nav-link" href="/login" style="color: white">Log in</a>
           </li>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color: white">{{user.username}}</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/logout" style="color: white">Log out</a>
+          </li>
+        {% endif %}
+
     </ul>
   </div>
 </nav>
